@@ -259,7 +259,7 @@ jobs:
       fail-fast: false
       matrix:
         target: [win64,winarm64,linux64,linuxarm64]
-        variant: [gpl,lgpl,gpl 8.0,gpl 7.1,lgpl 8.0,lgpl 7.1,gpl-shared,lgpl-shared,gpl-shared 8.0,gpl-shared 7.1,lgpl-shared 8.0,lgpl-shared 7.1]
+        variant: [gpl,lgpl,gpl 8.0,gpl 7.1,lgpl 8.0,lgpl 7.1,gpl-shared,lgpl-shared,nonfree,gpl-shared 8.0,gpl-shared 7.1,lgpl-shared 8.0,lgpl-shared 7.1,nonfree 8.0,nonfree 7.1,nonfree-shared 8.0,nonfree-shared 7.1]
     steps:
       - name: Free Disk-Space
         run: df -h && sudo apt-get clean && docker system prune -a -f && sudo rm -rf /opt/ghc /usr/local/.ghcup /usr/local/lib/android && df -h
@@ -336,5 +336,6 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
       - name: Prune old releases
         run: ./util/prunetags.sh
+        continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ github.token }}
